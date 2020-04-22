@@ -1,0 +1,24 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: search
+  data:
+    elasticsearch:
+      cluster-name: my-application
+      cluster-nodes: 10.211.55.7:9300
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+feign:
+  hystrix:
+    enabled: true
+ribbon:
+  ReadTimeout: 300000
+hystrix:
+  command:
+    execution:
+      isolation:
+        thread:
+          timeoutInMillseconds: 10000

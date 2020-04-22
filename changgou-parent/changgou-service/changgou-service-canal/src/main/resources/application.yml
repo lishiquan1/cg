@@ -1,0 +1,26 @@
+server:
+  port: 9003
+spring:
+  application:
+    name: canal
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    execution:
+      timeout:
+        enabled: true
+      isolation:
+        strategy: SEMAPHORE
+
+canal:
+  client:
+    instances:
+      example:
+        host: 10.211.55.7
+        port: 11111

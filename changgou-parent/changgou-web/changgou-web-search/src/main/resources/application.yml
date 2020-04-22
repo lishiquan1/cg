@@ -1,0 +1,19 @@
+server:
+  port: 10001
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+spring:
+  thymeleaf:
+    cache: false
+  application:
+    name: search-web
+  main:
+    # 当遇到同样名字的时候，是否允许覆盖注册
+    allow-bean-definition-overriding: true

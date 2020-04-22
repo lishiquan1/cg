@@ -1,0 +1,24 @@
+server:
+  port: 9006
+spring:
+  application:
+    name: order
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.211.55.7:3306/changgou_order
+    username: root
+    password: 123456
+  redis:
+    host: 10.211.55.7
+    port: 6379
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
