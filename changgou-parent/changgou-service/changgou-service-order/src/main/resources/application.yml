@@ -13,6 +13,11 @@ spring:
     port: 6379
   main:
     allow-bean-definition-overriding: true
+  rabbitmq:
+    host: 10.211.55.7
+    port: 5672
+    username: guest
+    password: guest
 eureka:
   client:
     service-url:
@@ -22,3 +27,14 @@ eureka:
 feign:
   hystrix:
     enabled: true
+# 配置支付交换机和队列
+mq:
+  pay:
+    # 交换机
+    exchange:
+      order: exchange.order
+    # 对列名称
+    queue:
+      order: queue.order
+    routing:
+      key: queue.order

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Demo Sku表现层
@@ -29,6 +30,15 @@ public class SkuController {
     private SkuService skuService;
 
     /**
+     * 商品库存递减
+     * @return 商品库存修改成功
+     */
+    @PutMapping("/decr/count")
+    public Result decrCount(@RequestBody Map<String, Integer> decrMap){
+        skuService.decrCount(decrMap);
+        return new Result<>(true, StatusCode.OK, "商品库存递减成功");
+    }
+    /**
      * 查询Sku全部数据
      * @return 查询成功
      */
@@ -37,7 +47,7 @@ public class SkuController {
     public Result<List<Sku>> findAll(){
         // 调用SkuService实现查询所有Sku
         List<Sku> list = skuService.findAll();
-        return new Result<List<Sku>>(true, StatusCode.OK, "查询成功", list) ;
+        return new Result<>(true, StatusCode.OK, "查询成功", list) ;
     }
 
     /**

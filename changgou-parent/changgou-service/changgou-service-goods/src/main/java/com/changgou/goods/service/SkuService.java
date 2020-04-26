@@ -4,6 +4,7 @@ import com.changgou.goods.pojo.Sku;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Demo Sku业务层接口
@@ -69,4 +70,9 @@ public interface SkuService {
      */
     PageInfo<Sku> findPage(Sku sku, Integer page, Integer size);
 
+    /**
+     * 商品库存递减
+     * @param decrMap 商品信息
+     */
+    void decrCount(Map<String, Integer> decrMap);
 }

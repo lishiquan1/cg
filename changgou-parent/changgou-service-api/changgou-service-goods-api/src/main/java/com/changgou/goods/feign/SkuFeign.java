@@ -7,6 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Demo Sku Feign接口
@@ -16,7 +17,12 @@ import java.util.List;
 @FeignClient(name="goods") // 指定调用goods微服务
 @RequestMapping("/sku")
 public interface SkuFeign {
-
+    /**
+     * 商品库存递减
+     * @return 商品库存修改成功
+     */
+    @PutMapping("/decr/count")
+    Result decrCount(@RequestParam Map<String, Integer> decrMap);
     /**
      * 查询Sku全部数据
      * @return 查询结果

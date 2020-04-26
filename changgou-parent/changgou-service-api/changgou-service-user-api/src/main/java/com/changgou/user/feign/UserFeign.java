@@ -17,6 +17,13 @@ import java.util.List;
 @RequestMapping("/user")
 public interface UserFeign {
     /**
+     * 增加用户积分
+     * @return 积分增加成功
+     */
+    @GetMapping("/points/add")
+    Result addPoints(@RequestParam Integer points);
+
+    /**
      * 根据用户名查询用户
      * @param username 用户名
      * @return 用户信息
@@ -53,15 +60,15 @@ public interface UserFeign {
      * @param id User id
      * @return 修改
      */
-    @PutMapping(value="/{id}")
-    Result update(@RequestBody User user,@PathVariable Integer id);
+    @PutMapping(value = "/{id}")
+    Result update(@RequestBody User user, @PathVariable Integer id);
 
     /**
      * 根据ID删除数据
      * @param id User id
      * @return 删除
      */
-    @DeleteMapping(value = "/{id}" )
+    @DeleteMapping(value = "/{id}")
     Result<User> delete(@PathVariable Integer id);
 
     /**
@@ -69,7 +76,7 @@ public interface UserFeign {
      * @param user 查询条件
      * @return 查询结果
      */
-    @PostMapping(value = "/search" )
+    @PostMapping(value = "/search")
     Result<List<User>> findList(@RequestBody(required = false) User user);
 
     /**
@@ -78,7 +85,7 @@ public interface UserFeign {
      * @param size 页大小
      * @return 分页结果
      */
-    @GetMapping(value = "/search/{page}/{size}" )
+    @GetMapping(value = "/search/{page}/{size}")
     Result<PageInfo<User>> findPage(@PathVariable Integer page, @PathVariable Integer size);
 
     /**
@@ -88,6 +95,6 @@ public interface UserFeign {
      * @param size 页大小
      * @return 分页结果
      */
-    @PostMapping(value = "/search/{page}/{size}" )
+    @PostMapping(value = "/search/{page}/{size}")
     Result<PageInfo<User>> findPage(@RequestBody(required = false) User user, @PathVariable Integer page, @PathVariable Integer size);
 }

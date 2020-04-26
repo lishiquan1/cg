@@ -67,7 +67,7 @@ spring:
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 4
         #认证微服务
-        - id: changgou_oauth_user
+        - id: changgou_oauth_route
           uri: lb://user-oauth
           predicates:
             - Path=/api/oauth/**

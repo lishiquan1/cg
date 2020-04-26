@@ -77,7 +77,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         // 所有请求必须通过认证
         http.authorizeRequests()
                 // 放行的路径, 注册访问的接口
-                .antMatchers()
+                .antMatchers("/goods/*")
                 .permitAll()
                 .anyRequest()
                 // 其他地址需要认证授权

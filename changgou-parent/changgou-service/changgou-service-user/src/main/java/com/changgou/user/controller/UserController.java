@@ -1,10 +1,11 @@
 package com.changgou.user.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.changgou.common.util.BCrypt;
 import com.changgou.common.entity.Result;
 import com.changgou.common.entity.StatusCode;
+import com.changgou.common.util.BCrypt;
 import com.changgou.common.util.JwtUtil;
+import com.changgou.common.util.TokenDecode;
 import com.changgou.user.pojo.User;
 import com.changgou.user.service.UserService;
 import com.github.pagehelper.PageInfo;
@@ -76,6 +77,17 @@ public class UserController {
     }
 
     /**
+     * 增加用户积分
+     * @return 积分增加成功
+     */
+    @GetMapping("/points/add")
+    public Result addPoints(Integer points){
+        Integer id = (Integer) TokenDecode.getUserInfo().get("id");
+        userService.addPoints(id,points);
+        return new Result<>(true, StatusCode.OK, "积分增加成功");
+    }
+
+    /**
      * 查询User全部数据
      * @return 查询成功
      */
@@ -113,8 +125,7 @@ public class UserController {
         // 将密码加密
         String hashpw = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         user.setPassword(hashpw);
-        long time = System.currentTimeMillis();
-        Date date = new Date(time);
+        Date date = new Date();
         user.setCreateTime(date);
         user.setUpdateTime(date);
         // 调用UserService实现添加User
@@ -135,6 +146,8 @@ public class UserController {
         // 设置主键值
         user.setId(id);
         // 调用userService实现修改User
+        Date date = new Date();
+        user.setUpdateTime(date);
         userService.update(user);
         return new Result<>(true, StatusCode.OK, "修改成功");
     }

@@ -2,11 +2,12 @@ package com.changgou.order.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.persistence.*;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.lang.Long;
-import java.lang.String;
-import java.lang.Integer;
 /**
  * Demo OrderItem实体类
  *
@@ -37,7 +38,7 @@ public class OrderItem implements Serializable{
 	private Integer skuId;
 
 	@ApiModelProperty("订单ID")
-	private Long orderId;
+	private Integer orderId;
 
 	@ApiModelProperty("商品名称")
 	private String name;
@@ -104,10 +105,10 @@ public class OrderItem implements Serializable{
 	public void setSkuId(Integer skuId) {
 		this.skuId = skuId;
 	}
-	public Long getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(Long orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
 	public String getName() {

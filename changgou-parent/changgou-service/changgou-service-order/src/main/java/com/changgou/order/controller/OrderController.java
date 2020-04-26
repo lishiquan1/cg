@@ -1,5 +1,6 @@
 package com.changgou.order.controller;
 
+import com.changgou.common.util.TokenDecode;
 import com.changgou.order.pojo.Order;
 import com.changgou.order.service.OrderService;
 import com.github.pagehelper.PageInfo;
@@ -62,6 +63,9 @@ public class OrderController {
     @ApiOperation(value = "Order添加", notes = "添加Order方法详情", tags = {"OrderController"})
     @PostMapping
     public Result add(@RequestBody @ApiParam(name = "Order对象",value = "传入JSON数据",required = true) Order order){
+        // 获取当前用户id并赋值给order对象
+        Integer userId =(Integer)TokenDecode.getUserInfo().get("id");
+        order.setUserId(userId);
         // 调用OrderService实现添加Order
         orderService.add(order);
         return new Result<>(true, StatusCode.OK, "添加成功");

@@ -241,4 +241,14 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    /**
+     * 增加用户积分
+     * @param id 用户id
+     * @param points 积分
+     */
+    @Override
+    public void addPoints(Integer id, Integer points) {
+        userMapper.addPoints(id,points);
+    }
+
 }

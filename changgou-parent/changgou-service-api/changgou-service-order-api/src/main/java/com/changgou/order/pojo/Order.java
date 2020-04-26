@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.lang.String;
 import java.lang.Integer;
+import java.util.List;
+
 /**
  * Demo Order实体类
  *
@@ -21,8 +23,8 @@ public class Order implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ApiModelProperty("订单ID")
-	private String orderId;
+	@ApiModelProperty("订单")
+	private String order;
 
 	@ApiModelProperty("数量合计")
 	private Integer totalNum;
@@ -67,7 +69,7 @@ public class Order implements Serializable{
 	private String shippingCode;
 
 	@ApiModelProperty("用户名称")
-	private String username;
+	private Integer userId;
 
 	@ApiModelProperty("买家留言")
 	private String buyerMessage;
@@ -102,19 +104,26 @@ public class Order implements Serializable{
 	@ApiModelProperty("是否删除: 0 未删除, 1 已删除")
 	private String isDelete;
 
+	@ApiModelProperty("订单的商品id")
+	private List<Integer> skuIds;
 
-
+	public List<Integer> getSkuIds() {
+		return skuIds;
+	}
+	public void setSkuIds(List<Integer> skuIds) {
+		this.skuIds = skuIds;
+	}
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getOrderId() {
-		return orderId;
+	public String getOrder() {
+		return order;
 	}
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
+	public void setOrder(String order) {
+		this.order = order;
 	}
 	public Integer getTotalNum() {
 		return totalNum;
@@ -200,11 +209,11 @@ public class Order implements Serializable{
 	public void setShippingCode(String shippingCode) {
 		this.shippingCode = shippingCode;
 	}
-	public String getUsername() {
-		return username;
+	public Integer getUserId() {
+		return userId;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	public String getBuyerMessage() {
 		return buyerMessage;

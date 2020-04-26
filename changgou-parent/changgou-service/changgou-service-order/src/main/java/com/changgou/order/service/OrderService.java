@@ -11,7 +11,20 @@ import java.util.List;
  * @author lishiquan
  */
 public interface OrderService {
-    
+    /**
+     * 修改订单状态
+     * @param outTradeNo 订单号
+     * @param payTime 支付时间
+     * @param transactionId 交易流水号
+     */
+    void updateStatus(String outTradeNo, String payTime, String transactionId) throws Exception;
+
+    /**
+     * 删除[修改状态]订单回滚库存
+     * @param outTradeNo 订单号
+     */
+    void deleteOrder(String outTradeNo);
+
     /**
      * 查询所有Order
      * @return 查询结果

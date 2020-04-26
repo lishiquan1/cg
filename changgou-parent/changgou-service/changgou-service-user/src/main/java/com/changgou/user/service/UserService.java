@@ -83,4 +83,11 @@ public interface UserService {
      * @return 用户信息
      */
     User findByName(String username);
+
+    /**
+     * 增加用户积分
+     * @param id 用户id
+     * @param points 积分
+     */
+    void addPoints(Integer id, Integer points);
 }
