@@ -33,7 +33,19 @@ public class WeiXinPayController {
     private RabbitTemplate rabbitTemplate;
 
     /**
+     * 关闭订单
+     * @param parameterMap
+     * @return
+     */
+    @PostMapping("/close")
+    public Result<Map<String, String>> closeWeiXinPay(@RequestBody Map<String, String> parameterMap){
+        Map<String, String> resultMap = weiXinPayService.closeWeiXinPay(parameterMap);
+        return new Result<>(true, StatusCode.OK, "关闭订单", resultMap);
+    }
+    /**
      * 创建二维码
+     * 普通订单: exchange = exchange.order, routingkey = queue.order
+     * 秒杀订单: exchange = exchange.seckillorder, routingkey = queue.seckillorder
      * @param parameterMap 请求微信支付需要的参数
      * @return 二维码生成成功
      */
@@ -76,8 +88,11 @@ public class WeiXinPayController {
         byte[] bytes = baos.toByteArray();
         String xmlResult = new String(bytes, StandardCharsets.UTF_8);
         Map<String, String> resultMap = WXPayUtil.xmlToMap(xmlResult);
+        // 获取自定义参数
+        String attach = resultMap.get("attach");
+        Map<String, String> attachMap = JSON.parseObject(attach, Map.class);
         // 发送支付结果给MQ
-        rabbitTemplate.convertAndSend("exchange.order", "queue.order", JSON.toJSONString(resultMap));
+        rabbitTemplate.convertAndSend(attachMap.get("exchange"), attachMap.get("routingkey"), JSON.toJSONString(resultMap));
         String result = "<xml>\n" +
                 "\n" +
                 "  <return_code><![CDATA[SUCCESS]]></return_code>\n" +

@@ -22,10 +22,10 @@ public class Preferential implements Serializable{
 	private Integer id;
 
 	@ApiModelProperty("消费金额")
-	private Integer buyMoney;
+	private Double buyMoney;
 
 	@ApiModelProperty("优惠金额")
-	private Integer preMoney;
+	private Double preMoney;
 
 	@ApiModelProperty("分类ID")
 	private Integer categoryId;
@@ -50,16 +50,16 @@ public class Preferential implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getBuyMoney() {
+	public Double getBuyMoney() {
 		return buyMoney;
 	}
-	public void setBuyMoney(Integer buyMoney) {
+	public void setBuyMoney(Double buyMoney) {
 		this.buyMoney = buyMoney;
 	}
-	public Integer getPreMoney() {
+	public Double getPreMoney() {
 		return preMoney;
 	}
-	public void setPreMoney(Integer preMoney) {
+	public void setPreMoney(Double preMoney) {
 		this.preMoney = preMoney;
 	}
 	public Integer getCategoryId() {

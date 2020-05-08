@@ -46,4 +46,29 @@ public class RabbitMQConfig {
         return BindingBuilder.bind(orderQueue).to(orderExchange).with(env.getProperty("mq.pay.routing.key")).noargs();
     }
 
+    /*秒杀队列创建*/
+
+    /**
+     * 创建队列
+     */
+    @Bean
+    public Queue seckillOrderQueue() {
+        return new Queue(Objects.requireNonNull(env.getProperty("mq.pay.queue.seckillorder")));
+    }
+
+    /**
+     * 创建交换机
+     */
+    @Bean
+    public Exchange seckillOrderExchange() {
+        return new DirectExchange(env.getProperty("mq.pay.exchange.seckillorder"), true, false);
+    }
+
+    /**
+     * 队列绑定交换机
+     */
+    @Bean
+    public Binding seckillOrderQueueExchange(Queue seckillOrderQueue, Exchange seckillOrderExchange) {
+        return BindingBuilder.bind(seckillOrderQueue).to(seckillOrderExchange).with(env.getProperty("mq.pay.routing.seckillkey")).noargs();
+    }
 }

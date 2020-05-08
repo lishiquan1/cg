@@ -28,11 +28,11 @@ public class Pref implements Serializable{
 
 	@ApiModelProperty(value = "消费金额",required = false)
     @Column(name = "buy_money")
-	private Integer buyMoney;//消费金额
+	private Double buyMoney;//消费金额
 
 	@ApiModelProperty(value = "优惠金额",required = false)
     @Column(name = "per_money")
-	private Integer perMoney;//优惠金额
+	private Double perMoney;//优惠金额
 
 	@ApiModelProperty(value = "获取开始日期",required = false)
     @Column(name = "start_time")
@@ -71,21 +71,21 @@ public class Pref implements Serializable{
 		this.categoryId = categoryId;
 	}
 	//get方法
-	public Integer getBuyMoney() {
+	public Double getBuyMoney() {
 		return buyMoney;
 	}
 
 	//set方法
-	public void setBuyMoney(Integer buyMoney) {
+	public void setBuyMoney(Double buyMoney) {
 		this.buyMoney = buyMoney;
 	}
 	//get方法
-	public Integer getPerMoney() {
+	public Double getPerMoney() {
 		return perMoney;
 	}
 
 	//set方法
-	public void setPerMoney(Integer perMoney) {
+	public void setPerMoney(Double perMoney) {
 		this.perMoney = perMoney;
 	}
 	//get方法

@@ -30,16 +30,16 @@ public class Order implements Serializable{
 	private Integer totalNum;
 
 	@ApiModelProperty("金额合计")
-	private Integer totalMoney;
+	private Double totalMoney;
 
 	@ApiModelProperty("优惠金额")
-	private Integer preMoney;
+	private Double preMoney;
 
 	@ApiModelProperty("邮费")
-	private Integer poetFee;
+	private Double poetFee;
 
 	@ApiModelProperty("实付金额")
-	private Integer payMoney;
+	private Double payMoney;
 
 	@ApiModelProperty("支付类型: 1 在线支付, 2 货到付款")
 	private String payType;
@@ -131,28 +131,28 @@ public class Order implements Serializable{
 	public void setTotalNum(Integer totalNum) {
 		this.totalNum = totalNum;
 	}
-	public Integer getTotalMoney() {
+	public Double getTotalMoney() {
 		return totalMoney;
 	}
-	public void setTotalMoney(Integer totalMoney) {
+	public void setTotalMoney(Double totalMoney) {
 		this.totalMoney = totalMoney;
 	}
-	public Integer getPreMoney() {
+	public Double getPreMoney() {
 		return preMoney;
 	}
-	public void setPreMoney(Integer preMoney) {
+	public void setPreMoney(Double preMoney) {
 		this.preMoney = preMoney;
 	}
-	public Integer getPoetFee() {
+	public Double getPoetFee() {
 		return poetFee;
 	}
-	public void setPoetFee(Integer poetFee) {
+	public void setPoetFee(Double poetFee) {
 		this.poetFee = poetFee;
 	}
-	public Integer getPayMoney() {
+	public Double getPayMoney() {
 		return payMoney;
 	}
-	public void setPayMoney(Integer payMoney) {
+	public void setPayMoney(Double payMoney) {
 		this.payMoney = payMoney;
 	}
 	public String getPayType() {

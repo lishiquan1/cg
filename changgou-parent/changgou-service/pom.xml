@@ -20,5 +20,6 @@
         <module>changgou-service-user</module>
         <module>changgou-service-order</module>
         <module>changgou-service-pay</module>
+        <module>changgou_service_seckill</module>
     </modules>
 </project>

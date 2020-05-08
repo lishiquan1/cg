@@ -1,7 +1,9 @@
 package com.changgou.order.rabbitMQ.listener;
 
+import com.changgou.order.service.OrderService;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,11 +15,17 @@ import org.springframework.stereotype.Component;
 @Component
 @RabbitListener(queues = "orderListenerQueue")
 public class DelayMessageListener {
+    @Autowired
+    private OrderService orderService;
+
     /**
      * 延时队列监听
      */
     @RabbitHandler
-    public void getDelayMessage(String message){
+    public void getDelayMessage(String message) {
+        // 关闭订单
+        orderService.deleteOrder(message);
+        // 回滚库存
 
     }
 }

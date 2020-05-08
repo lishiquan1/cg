@@ -53,7 +53,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         // 客户端秘钥
                         clientSecret,
                         // 权限
-                        AuthorityUtils.commaSeparatedStringToAuthorityList(""));
+                        AuthorityUtils.commaSeparatedStringToAuthorityList("user"));
             }
         }
         // ===用户信息认证===

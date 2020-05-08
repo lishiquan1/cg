@@ -104,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
         // 总数量
         int totalNum = 0;
         // 总金额
-        int totalMoney = 0;
+        double totalMoney = 0;
         for (OrderItem orderItem : orderItems) {
             totalNum += orderItem.getNum();
             totalMoney += orderItem.getMoney();
@@ -139,7 +139,7 @@ public class OrderServiceImpl implements OrderService {
         // 库存递减
         skuFeign.decrCount(decrMap);
         // 添加订单
-        rabbitTemplate.convertAndSend("orderDelayMessage", (Object) order.getOrder(), message -> {
+        rabbitTemplate.convertAndSend("orderDelayMessage",  order.getOrder(), message -> {
             // 设置延时时间(30分钟)
             message.getMessageProperties().setExpiration("1800000");
             return message;

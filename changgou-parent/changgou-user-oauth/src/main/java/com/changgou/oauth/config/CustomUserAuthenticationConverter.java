@@ -16,7 +16,7 @@ import java.util.Map;
 public class CustomUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
 
     @Autowired
-    UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Override
     public Map<String, ?> convertUserAuthentication(Authentication authentication) {

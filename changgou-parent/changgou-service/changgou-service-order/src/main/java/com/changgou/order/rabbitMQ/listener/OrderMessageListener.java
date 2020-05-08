@@ -34,9 +34,9 @@ public class OrderMessageListener {
             // 订单号
             String outTradeNo = resultMap.get("out_trade_no");
             // 业务结果
-            String result_code = resultMap.get("result_code");
+            String resultCode = resultMap.get("result_code");
             // 支付成功, 修改订单状态
-            if ("SUCCESS".equals(result_code)) {
+            if ("SUCCESS".equals(resultCode)) {
                 // 微信支付交易流水号
                 orderService.updateStatus(outTradeNo, resultMap.get("time_end"), resultMap.get("transaction_id"));
             }else {

@@ -1,10 +1,12 @@
 package com.changgou.pay.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.changgou.common.util.HttpClient;
 import com.changgou.pay.service.WeiXinPayService;
 import com.github.wxpay.sdk.WXPayUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +41,38 @@ public class WeiXinPayServiceImpl implements WeiXinPayService {
     private String notifyUrl;
 
     /**
+     * 关闭微信支付订单
+     * @param parameterMap 请求微信支付需要的参数
+     * @return 结果
+     */
+    @Override
+    public Map<String, String> closeWeiXinPay(Map<String, String> parameterMap) {
+        try {
+            Map<String, String> paramMap = new HashMap<>();
+            paramMap.put("appid", appId);
+            paramMap.put("mch_id", partner);
+            paramMap.put("out_trade_no", parameterMap.get("outtradeno"));
+            paramMap.put("nonce_str", WXPayUtil.generateNonceStr());
+            String xmlParameters = WXPayUtil.generateSignedXml(paramMap, partnerKey);
+            String url = "https://api.mch.weixin.qq.com/pay/closeorder";
+            HttpClient httpClient = new HttpClient(url);
+            httpClient.setHttps(true);
+            // 提交参数
+            httpClient.setXmlParam(xmlParameters);
+            // 执行请求
+            httpClient.post();
+            // 获取返回的数据
+            String resultXml = httpClient.getContent();
+            // 将返回的XML数据转成Map
+            Map<String, String> resultMap = WXPayUtil.xmlToMap(resultXml);
+            return resultMap;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * 创建二维码
      * @param parameterMap 请求微信支付需要的参数
      * @return 微信支付返回的结果
@@ -65,6 +99,19 @@ public class WeiXinPayServiceImpl implements WeiXinPayService {
             paramMap.put("notify_url", notifyUrl);
             // 交易类型
             paramMap.put("product_id", "NATIVE");
+            // 获取自定义数据
+            String exchange = parameterMap.get("exchange");
+            String routingkey = parameterMap.get("routingkey");
+            Map<String, String> attachMap = new HashMap<>();
+            attachMap.put("exchange", exchange);
+            attachMap.put("routingkey", routingkey);
+            // 如果是秒杀订单, 需要传用户id
+            String id = parameterMap.get("id");
+            if (!StringUtils.isEmpty(id)){
+                attachMap.put("id", id);
+            }
+            String attach = JSON.toJSONString(attachMap);
+            paramMap.put("attach", attach);
             // Map转XML并添加签名
             String xmlParameters = WXPayUtil.generateSignedXml(paramMap, partnerKey);
             // URL地址

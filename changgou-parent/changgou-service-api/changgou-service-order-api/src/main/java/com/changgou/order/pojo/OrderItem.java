@@ -44,16 +44,16 @@ public class OrderItem implements Serializable{
 	private String name;
 
 	@ApiModelProperty("单价")
-	private Integer price;
+	private Double price;
 
 	@ApiModelProperty("数量")
 	private Integer num;
 
 	@ApiModelProperty("总金额")
-	private Integer money;
+	private Double money;
 
 	@ApiModelProperty("实付金额")
-	private Integer payMoney;
+	private Double payMoney;
 
 	@ApiModelProperty("图片地址")
 	private String image;
@@ -62,7 +62,7 @@ public class OrderItem implements Serializable{
 	private Integer weight;
 
 	@ApiModelProperty("运费")
-	private Integer postFee;
+	private Double postFee;
 
 	@ApiModelProperty("是否退后")
 	private String isReturn;
@@ -117,10 +117,10 @@ public class OrderItem implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(Integer price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	public Integer getNum() {
@@ -129,16 +129,16 @@ public class OrderItem implements Serializable{
 	public void setNum(Integer num) {
 		this.num = num;
 	}
-	public Integer getMoney() {
+	public Double getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
-	public Integer getPayMoney() {
+	public Double getPayMoney() {
 		return payMoney;
 	}
-	public void setPayMoney(Integer payMoney) {
+	public void setPayMoney(Double payMoney) {
 		this.payMoney = payMoney;
 	}
 	public String getImage() {
@@ -153,10 +153,10 @@ public class OrderItem implements Serializable{
 	public void setWeight(Integer weight) {
 		this.weight = weight;
 	}
-	public Integer getPostFee() {
+	public Double getPostFee() {
 		return postFee;
 	}
-	public void setPostFee(Integer postFee) {
+	public void setPostFee(Double postFee) {
 		this.postFee = postFee;
 	}
 	public String getIsReturn() {

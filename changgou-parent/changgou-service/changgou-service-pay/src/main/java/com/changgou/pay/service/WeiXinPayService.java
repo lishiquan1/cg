@@ -9,6 +9,14 @@ import java.util.Map;
  * @date 2020/4/24 5:24 下午
  */
 public interface WeiXinPayService {
+
+    /**
+     * 关闭微信交易订单
+     * @param parameterMap 请求微信支付需要的参数
+     * @return 关闭微信支付返回的结果
+     */
+    Map<String, String> closeWeiXinPay(Map<String, String> parameterMap);
+
     /**
      * 创建二维码
      * @param parameterMap 请求微信支付需要的参数

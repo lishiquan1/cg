@@ -42,16 +42,16 @@ public class ReturnOrderItem implements Serializable{
 	private String title;
 
 	@ApiModelProperty("单价")
-	private Integer price;
+	private Double price;
 
 	@ApiModelProperty("数量")
 	private Integer num;
 
 	@ApiModelProperty("总金额")
-	private Integer money;
+	private Double money;
 
 	@ApiModelProperty("支付金额")
-	private Integer payMoney;
+	private Double payMoney;
 
 	@ApiModelProperty("图片地址")
 	private String image;
@@ -109,10 +109,10 @@ public class ReturnOrderItem implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Integer getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(Integer price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	public Integer getNum() {
@@ -121,16 +121,16 @@ public class ReturnOrderItem implements Serializable{
 	public void setNum(Integer num) {
 		this.num = num;
 	}
-	public Integer getMoney() {
+	public Double getMoney() {
 		return money;
 	}
-	public void setMoney(Integer money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
-	public Integer getPayMoney() {
+	public Double getPayMoney() {
 		return payMoney;
 	}
-	public void setPayMoney(Integer payMoney) {
+	public void setPayMoney(Double payMoney) {
 		this.payMoney = payMoney;
 	}
 	public String getImage() {

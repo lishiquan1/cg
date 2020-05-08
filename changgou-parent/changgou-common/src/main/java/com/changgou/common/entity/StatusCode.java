@@ -29,4 +29,9 @@ public class StatusCode {
      */
     public static final int REPERROR =20005;
 
+    /**
+     * 没有对应的抢购数据
+     */
+    public static final int NOTFOUNDERROR =20006;
+
 }
