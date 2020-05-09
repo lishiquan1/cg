@@ -18,6 +18,11 @@ spring:
     port: 5672
     username: guest
     password: guest
+  # 微服务组名
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: my_test_tx_group
 eureka:
   client:
     service-url:

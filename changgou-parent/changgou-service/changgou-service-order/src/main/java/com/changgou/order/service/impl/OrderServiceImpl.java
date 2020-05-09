@@ -6,8 +6,10 @@ import com.changgou.order.dao.OrderMapper;
 import com.changgou.order.pojo.Order;
 import com.changgou.order.pojo.OrderItem;
 import com.changgou.order.service.OrderService;
+import com.changgou.user.feign.UserFeign;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -43,6 +45,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private UserFeign userFeign;
     /**
      * 修改订单状态
      * @param outTradeNo 订单号
@@ -91,6 +96,8 @@ public class OrderServiceImpl implements OrderService {
      * 增加Order
      * @param order Order实体类
      */
+    @GlobalTransactional // 分布式事务注解
+    // @Transactional // 本地事务
     @Override
     public void add(Order order) {
         List<OrderItem> orderItems = new ArrayList<>();
@@ -138,6 +145,8 @@ public class OrderServiceImpl implements OrderService {
         }
         // 库存递减
         skuFeign.decrCount(decrMap);
+        // 添加积分
+        userFeign.addPoints((int) totalMoney);
         // 添加订单
         rabbitTemplate.convertAndSend("orderDelayMessage",  order.getOrder(), message -> {
             // 设置延时时间(30分钟)
